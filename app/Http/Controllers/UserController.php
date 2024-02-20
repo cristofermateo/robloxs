@@ -41,4 +41,9 @@ class UserController extends Controller
         $user = User::find(1);
         */
     }
+
+    public function list(){
+        //buscar todos los usuarios
+        return view('users.list',compact('users'));
+    }
 }
