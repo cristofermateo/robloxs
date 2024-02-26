@@ -59,21 +59,23 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Game $weapon)
+    public function update(Request $request, String $id)
     {
-        //return $request->all();
+        // en lugar de recibir el modelo, mejor recibe el id, para que funcione postman
+        //  public function update(Request $request, String $id)
+        $game = Game::find($id);
         $request->validate([
 
             'name' => 'required',
             'user_id' => 'required',
         ]);
 
-        $weapon->name = $request->name;
-        $weapon->user_id = $request->user_id;
+        $game->name = $request->name;
+        $game->user_id = $request->user_id;
 
-        $weapon->update();
+        $game->update();
 
-        return $weapon;
+        return $game;
 
 
 

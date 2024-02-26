@@ -28,7 +28,7 @@ Route::apiResource('/weapons',WeaponController::class);
 
 
 
-
+// cada ruta es diferente, todas tienen post
 Route::post('/games', [GameController::class, 'store']);
 Route::post('/games/{id}', [GameController::class, 'show']);
 Route::post('/games/', [GameController::class, 'index']);

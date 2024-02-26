@@ -62,22 +62,15 @@ class RobukController extends Controller
      */
     public function update(Request $request, String $id)
     {
-        $robuks = Robuk::find($id);
+        $robuk = Robuk::find($id);
         $request->validate([
-
             'total' => 'required',
             'user_id' => 'required',
-        ]);
-
-        $robuks->total = $request->total;
-        $robuks->user_id = $request->user_id;
-
-        $robuks->update();
-
-        return $robuks;
-
-
-
+        ]); 
+        $robuk->total = $request->total;
+        $robuk->user_id = $request->user_id; 
+        $robuk->update(); 
+        return $robuk; 
     }
 
     /**
