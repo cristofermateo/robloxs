@@ -30,7 +30,7 @@ Route::apiResource('/weapons',WeaponController::class);
 
 // cada ruta es diferente, todas tienen post
 Route::post('/games', [GameController::class, 'store']);
-Route::post('/games/{id}', [GameController::class, 'show']);
-Route::post('/games/', [GameController::class, 'index']);
-Route::post('/games/{id}', [GameController::class, 'destroy']);
-Route::post('/games/{id}', [GameController::class, 'update']);
+Route::get('/games/{id}', [GameController::class, 'show']);
+Route::get('/games/', [GameController::class, 'index']);
+Route::delete('/games/{id}', [GameController::class, 'destroy']);
+Route::patch('/games/{id}', [GameController::class, 'update']);

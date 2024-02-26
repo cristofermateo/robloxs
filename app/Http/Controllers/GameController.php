@@ -12,8 +12,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        $weapon = Game::all();
-        return $weapon;
+        $game = Game::all();
+        return $game;
     }
 
     /**
@@ -29,13 +29,13 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $weapon = new Game;
-        $weapon->user_id= $request->user_id;
-        $weapon->name = $request->name;
+        $game = new Game;
+        $game->user_id= $request->user_id;
+        $game->name = $request->name;
 
 
-        $weapon->save();
-        return $weapon;
+        $game->save();
+        return $game;
     }
 
     /**
@@ -43,8 +43,8 @@ class GameController extends Controller
      */
     public function show(string $id)
     {
-        $weapon = Game::find($id);
-        return $weapon;
+        $game = Game::find($id);
+        return $game;
 
     }
 
@@ -88,13 +88,13 @@ class GameController extends Controller
     {
         if (Game::where('id', $id)->exists()) {
             // El usuario existe
-            $weapon = Game::find($id);
-            $weapon->delete();
+            $game = Game::find($id);
+            $game->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
-            return 'has gastado tus weapon';
+            return 'juego eliminado';
         } else {
         // El usuario no existe
-            return 'ya has gastado tus weapon';
+            return 'ese juego ya se ha eliminado';
         }
     }
 }
