@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ServerController;
 use App\Http\Controllers\WeaponController;
 use App\Http\Controllers\RobukController;
 use App\Http\Controllers\GameController;
@@ -34,3 +35,9 @@ Route::get('/games/{id}', [GameController::class, 'show']);
 Route::get('/games/', [GameController::class, 'index']);
 Route::delete('/games/{id}', [GameController::class, 'destroy']);
 Route::patch('/games/{id}', [GameController::class, 'update']);
+
+Route::post('/games', [ServerController::class, 'store']);
+Route::get('/games/{id}', [ServerController::class, 'show']);
+Route::get('/games/', [ServerController::class, 'index']);
+Route::delete('/games/{id}', [ServerController::class, 'destroy']);
+Route::patch('/games/{id}', [ServerController::class, 'update']);
