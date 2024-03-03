@@ -12,4 +12,10 @@ class Chat extends Model
     protected $fillable = [
         'game_id',
     ];
+
+    
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

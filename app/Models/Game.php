@@ -13,4 +13,8 @@ class Game extends Model
         'user_id',
         'name'
     ];
+
+    public function chat(){
+        return $this->hasOne(Chat::class);
+    }
 }
