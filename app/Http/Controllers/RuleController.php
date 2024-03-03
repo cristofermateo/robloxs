@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Weapon;
+
+use App\Models\Rule;
 use Illuminate\Http\Request;
 
-class WeaponController extends Controller
+class RuleController extends Controller
 {
 
     /**
@@ -12,8 +13,8 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        $weapon = Weapon::all();
-        return $weapon;
+        $rules = Rule::all();
+        return $rules;
     }
 
     /**
@@ -29,13 +30,13 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        $weapon = new Weapon;
-        $weapon->user_id= $request->user_id;
-        $weapon->name = $request->name;
+        $rules = new Rule;
+        $rules->game_id = $request->game_id;
+        $rules->content = $request->content;
 
 
-        $weapon->save();
-        return $weapon;
+        $rules->save();
+        return $rules;
     }
 
     /**
@@ -43,8 +44,8 @@ class WeaponController extends Controller
      */
     public function show(string $id)
     {
-        $weapon = Weapon::find($id);
-        return $weapon;
+        $rules = Rule::find($id);
+        return $rules;
 
     }
 
@@ -59,24 +60,18 @@ class WeaponController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Weapon $weapon)
+    public function update(Request $request, String $id)
     {
-        return $request->all();
+        $rules = Rule::find($id);
         $request->validate([
+            'content' => 'content',
+            'game_id' => 'game_id',
 
-            'name' => 'required',
-            'user_id' => 'required',
         ]);
-
-        $weapon->name = $request->name;
-        $weapon->user_id = $request->user_id;
-
-        $weapon->update();
-
-        return $weapon;
-
-
-
+        $rules->content = $request->content;
+        $rules->game_id = $request->game_id;
+        $rules->update();
+        return $rules;
     }
 
     /**
@@ -84,17 +79,15 @@ class WeaponController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Weapon::where('id', $id)->exists()) {
+        if (Rule::where('id', $id)->exists()) {
             // El usuario existe
-            $weapon = Weapon::find($id);
-            $weapon->delete();
+            $rules = Rule::find($id);
+            $rules->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
-            return 'has gastado tus weapon';
+            return 'se elimino correctamente el usuario';
         } else {
         // El usuario no existe
-            return 'ya has gastado tus weapon';
+            return 'el usuario no existe';
         }
     }
 }
-
-

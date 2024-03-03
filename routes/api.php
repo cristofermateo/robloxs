@@ -1,9 +1,14 @@
 <?php
-use App\Http\Controllers\ServerController;
 use App\Http\Controllers\WeaponController;
+use App\Http\Controllers\ServerController;
 use App\Http\Controllers\RobukController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CommentController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +30,12 @@ Route::post('/login', [App\Http\Controllers\AuthenticationController::class, 'lo
 
 Route::apiResource('/users',UserController::class);
 Route::apiResource('/robuks',RobukController::class);
-Route::apiResource('/weapons',WeaponController::class);
+Route::apiResource('weapons',WeaponController::class);
+Route::apiResource('/sales',SaleController::class);
+Route::apiResource('/rules',RuleController::class);
+Route::apiResource('/chats',ChatController::class);
+Route::apiResource('/comments',CommentController::class);
+
 
 
 
@@ -36,8 +46,8 @@ Route::get('/games/', [GameController::class, 'index']);
 Route::delete('/games/{id}', [GameController::class, 'destroy']);
 Route::patch('/games/{id}', [GameController::class, 'update']);
 
-Route::post('/games', [ServerController::class, 'store']);
-Route::get('/games/{id}', [ServerController::class, 'show']);
-Route::get('/games/', [ServerController::class, 'index']);
-Route::delete('/games/{id}', [ServerController::class, 'destroy']);
-Route::patch('/games/{id}', [ServerController::class, 'update']);
+Route::post('/Servers', [ServerController::class, 'store']);
+Route::get('/Servers/{id}', [ServerController::class, 'show']);
+Route::get('/Servers/', [ServerController::class, 'index']);
+Route::patch('/Servers/{id}', [ServerController::class, 'update']);
+Route::delete('/Servers/{id}', [ServerController::class, 'destroy']);

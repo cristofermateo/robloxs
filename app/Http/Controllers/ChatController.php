@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Weapon;
+
+use App\Models\Chat;
 use Illuminate\Http\Request;
 
-class WeaponController extends Controller
+class ChatController extends Controller
 {
 
     /**
@@ -12,8 +13,8 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        $weapon = Weapon::all();
-        return $weapon;
+        $chats = Chat::all();
+        return $chats;
     }
 
     /**
@@ -29,13 +30,11 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        $weapon = new Weapon;
-        $weapon->user_id= $request->user_id;
-        $weapon->name = $request->name;
+        $chats = new Chat;
+        $chats->game_id= $request->game_id;
 
-
-        $weapon->save();
-        return $weapon;
+        $chats->save();
+        return $chats;
     }
 
     /**
@@ -43,8 +42,8 @@ class WeaponController extends Controller
      */
     public function show(string $id)
     {
-        $weapon = Weapon::find($id);
-        return $weapon;
+        $chats = Chat::find($id);
+        return $chats;
 
     }
 
@@ -59,24 +58,15 @@ class WeaponController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Weapon $weapon)
+    public function update(Request $request, String $id)
     {
-        return $request->all();
+        $chats = Chat::find($id);
         $request->validate([
-
-            'name' => 'required',
-            'user_id' => 'required',
+            'game_id' => 'required',
         ]);
-
-        $weapon->name = $request->name;
-        $weapon->user_id = $request->user_id;
-
-        $weapon->update();
-
-        return $weapon;
-
-
-
+        $chats->game_id = $request->game_id;
+        $chats->update();
+        return $chats;
     }
 
     /**
@@ -84,17 +74,15 @@ class WeaponController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Weapon::where('id', $id)->exists()) {
+        if (Chat::where('id', $id)->exists()) {
             // El usuario existe
-            $weapon = Weapon::find($id);
-            $weapon->delete();
+            $chats = Chat::find($id);
+            $chats->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
-            return 'has gastado tus weapon';
+            return 'chat eliminado';
         } else {
         // El usuario no existe
-            return 'ya has gastado tus weapon';
+            return 'ese chat ya se elimino';
         }
     }
 }
-
-

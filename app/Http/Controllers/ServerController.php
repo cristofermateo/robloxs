@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Server;
 use Illuminate\Http\Request;
 
-class RobukController extends Controller
+class ServerController extends Controller
 {
 
     /**
@@ -82,10 +82,7 @@ class RobukController extends Controller
     public function destroy(string $id)
     {
         if (Server::where('id', $id)->exists()) {
-            // El usuario existe
-            $servers = Server::find($id);
-            $servers->delete();
-            // Procede con cualquier acción adicional después de eliminar el usuario
+            // El usuario existesminar el usuario
             return 'has gastado tus robuks';
         } else {
         // El usuario no existe

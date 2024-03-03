@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Weapon;
+
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
-class WeaponController extends Controller
+class SaleController extends Controller
 {
 
     /**
@@ -12,8 +13,8 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        $weapon = Weapon::all();
-        return $weapon;
+        $sales = Sale::all();
+        return $sales;
     }
 
     /**
@@ -29,13 +30,13 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        $weapon = new Weapon;
-        $weapon->user_id= $request->user_id;
-        $weapon->name = $request->name;
+        $sales = new Sale;
+        $sales->user_id = $request->user_id;
+        $sales->total = $request->total;
 
 
-        $weapon->save();
-        return $weapon;
+        $sales->save();
+        return $sales;
     }
 
     /**
@@ -43,8 +44,8 @@ class WeaponController extends Controller
      */
     public function show(string $id)
     {
-        $weapon = Weapon::find($id);
-        return $weapon;
+        $sales = Sale::find($id);
+        return $sales;
 
     }
 
@@ -59,24 +60,18 @@ class WeaponController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Weapon $weapon)
+    public function update(Request $request, String $id)
     {
-        return $request->all();
+        $sales = Sale::find($id);
         $request->validate([
-
-            'name' => 'required',
-            'user_id' => 'required',
+            'name' => 'name',
+            'type' => 'type',
+            'region' => 'region',
         ]);
-
-        $weapon->name = $request->name;
-        $weapon->user_id = $request->user_id;
-
-        $weapon->update();
-
-        return $weapon;
-
-
-
+        $sales->total = $request->total;
+        $sales->user_id = $request->user_id;
+        $sales->update();
+        return $sales;
     }
 
     /**
@@ -84,17 +79,15 @@ class WeaponController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Weapon::where('id', $id)->exists()) {
+        if (Sale::where('id', $id)->exists()) {
             // El usuario existe
-            $weapon = Weapon::find($id);
-            $weapon->delete();
+            $user = Sale::find($id);
+            $user->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
-            return 'has gastado tus weapon';
+            return 'se elimino correctamente el usuario';
         } else {
         // El usuario no existe
-            return 'ya has gastado tus weapon';
+            return 'el usuario no existe';
         }
     }
 }
-
-
