@@ -47,7 +47,7 @@ class User extends Authenticatable
     public function weapons(){
         return $this->hasMany(Weapon::class);
     }
-
+     
     public function robuks(){
         return $this->hasMany(Robuk::class);
     }

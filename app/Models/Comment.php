@@ -13,6 +13,6 @@ class Comment extends Model
         'user_id',
         'text',
         'chat_id',
-
+        'points'
     ];
 }
