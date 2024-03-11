@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class ItemController extends Controller
 {
         /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $games = Game::with('rules')->with('chat.comments')->get();
+        $items = Item::all();
 
-        return $games;
+        return $items;
     }
 
     /**
@@ -30,13 +30,16 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $game = new Game;
-        $game->user_id= $request->user_id;
-        $game->name = $request->name;
+        $items = new Item;
+        $items->user_id= $request->user_id;
+        $items->name = $request->name;
+        $items->price= $request->price;
+        $items->photo= $request->photo;
+        $items->sub_cat_id = $request->sub_cat_id;
 
 
-        $game->save();
-        return $game;
+        $items->save();
+        return $items;
     }
 
     /**
@@ -45,9 +48,8 @@ class GameController extends Controller
     public function show(string $id)
     {
        // $game = Game::find($id);
-        $game = Game::where('id',$id)->with('chat.comments')->first();
-        $game->load('rules');
-        return $game;
+       $items = Item::find($id);
+        return $items;
     }
 
     /**
@@ -65,19 +67,26 @@ class GameController extends Controller
     {
         // en lugar de recibir el modelo, mejor recibe el id, para que funcione postman
         //  public function update(Request $request, String $id)
-        $game = Game::find($id);
+        $items = Item::find($id);
         $request->validate([
 
             'name' => 'required',
             'user_id' => 'required',
+            'photo' => 'rquired',
+            'price' => 'required',
+            'cat_id' => 'cat_id',
+
         ]);
 
-        $game->name = $request->name;
-        $game->user_id = $request->user_id;
+        $items->name = $request->name;
+        $items->user_id = $request->user_id;
+        $items->price = $request->price;
+        $items->photo = $request->photo;
+        $items->cat_id = $request->cat_id;
 
-        $game->update();
+        $items->update();
 
-        return $game;
+        return $items;
 
 
 
@@ -88,10 +97,10 @@ class GameController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Game::where('id', $id)->exists()) {
+        if (Item::where('id', $id)->exists()) {
             // El usuario existe
-            $game = Game::find($id);
-            $game->delete();
+            $items = Item::find($id);
+            $items->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
             return 'juego eliminado';
         } else {

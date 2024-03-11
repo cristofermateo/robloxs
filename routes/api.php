@@ -8,7 +8,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\CatController;
+use App\Http\Controllers\SubCatController;
+use App\Http\Controllers\ItemController;
+
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +39,16 @@ Route::apiResource('/users',UserController::class);
 Route::apiResource('/robuks',RobukController::class);
 Route::apiResource('weapons',WeaponController::class);
 Route::apiResource('/sales',SaleController::class);
+Route::apiResource('/role',RoleController::class);
 Route::apiResource('/rules',RuleController::class);
 Route::apiResource('/chats',ChatController::class);
 Route::apiResource('/comments',CommentController::class);
+Route::apiResource('/cats',CatController::class);
+Route::apiResource('/subcats',SubCatController::class);
+Route::apiResource('/items',ItemController::class);
+
+
+
 
 
 

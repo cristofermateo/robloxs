@@ -17,4 +17,11 @@ class Game extends Model
     public function chat(){
         return $this->hasOne(Chat::class);
     }
+
+
+    public function rules(){
+        return $this->hasMany(Rule::class);
+    }
 }
+
+

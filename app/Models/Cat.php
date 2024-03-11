@@ -5,49 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Store extends Model
+class Cat extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type'
+        'name',
     ];
+
+
+
+    public function SubCats(){
+        return $this->hasMany(SubCat::class);
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

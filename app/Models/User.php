@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'gender'
+        'gender',
+        'role_id'
+
     ];
 
     /**
@@ -47,8 +49,16 @@ class User extends Authenticatable
     public function weapons(){
         return $this->hasMany(Weapon::class);
     }
-     
+
     public function robuks(){
         return $this->hasMany(Robuk::class);
+    }
+
+    public function sales(){
+        return $this->hasMany(Sale::class);
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\SubCat;
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class SubCatController extends Controller
 {
-        /**
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $games = Game::with('rules')->with('chat.comments')->get();
-
-        return $games;
+        $subcats = SubCat::all();
+        return $subcats;
     }
 
     /**
@@ -30,13 +30,13 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $game = new Game;
-        $game->user_id= $request->user_id;
-        $game->name = $request->name;
+        $SubCats = new SubCat;
+        $SubCats->name = $request->name;
+        $SubCats->cat_id = $request->cat_id;
 
 
-        $game->save();
-        return $game;
+        $SubCats->save();
+        return $SubCats;
     }
 
     /**
@@ -44,10 +44,9 @@ class GameController extends Controller
      */
     public function show(string $id)
     {
-       // $game = Game::find($id);
-        $game = Game::where('id',$id)->with('chat.comments')->first();
-        $game->load('rules');
-        return $game;
+        $SubCats = SubCat::find($id);
+        return $SubCats;
+
     }
 
     /**
@@ -63,24 +62,16 @@ class GameController extends Controller
      */
     public function update(Request $request, String $id)
     {
-        // en lugar de recibir el modelo, mejor recibe el id, para que funcione postman
-        //  public function update(Request $request, String $id)
-        $game = Game::find($id);
+        $SubCats = SubCat::find($id);
         $request->validate([
 
             'name' => 'required',
-            'user_id' => 'required',
+
         ]);
+        $SubCats->type = $request->type;
 
-        $game->name = $request->name;
-        $game->user_id = $request->user_id;
-
-        $game->update();
-
-        return $game;
-
-
-
+        $SubCats->update();
+        return $SubCats;
     }
 
     /**
@@ -88,15 +79,15 @@ class GameController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Game::where('id', $id)->exists()) {
+        if (SubCat::where('id', $id)->exists()) {
             // El usuario existe
-            $game = Game::find($id);
-            $game->delete();
+            $SubCats = SubCat::find($id);
+            $SubCats->delete();
             // Procede con cualquier acción adicional después de eliminar el usuario
-            return 'juego eliminado';
+            return 'eliminado';
         } else {
         // El usuario no existe
-            return 'ese juego ya se ha eliminado';
+            return 'se intento eliminar nada';
         }
     }
 }

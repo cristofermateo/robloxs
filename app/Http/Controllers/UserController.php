@@ -12,8 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return $users;
+        $games = User::with('sales')->with('weapons')->with('robuks')->get();
+
+        return $games;
     }
 
     /**
@@ -34,6 +35,8 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->gender = $request->gender;
         $user->email = $request->email;
+        $user->role_id = $request->role_id;
+
 
         $user->save();
         return $user;
@@ -47,7 +50,11 @@ class UserController extends Controller
         $user = User::findOrFail($id); // Encuentra el usuario por su ID o devuelve una excepción si no se encuentra
         $user->load('weapons');
         $user->load('robuks');
+        $user->load('sales');
+        $user->load('role');
         return $user; // Devuelve el usuario con sus armas cargadas
+
+
 
 
     }
