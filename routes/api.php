@@ -49,6 +49,7 @@ Route::apiResource('/subcats',SubCatController::class);
 Route::apiResource('/items',ItemController::class);
 
 Route::get('/games/free', [App\Http\Controllers\GameController::class, 'free']);
+Route::get('/games/money', [App\Http\Controllers\GameController::class, 'money']);
 
 
 

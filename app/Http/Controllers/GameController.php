@@ -108,8 +108,12 @@ class GameController extends Controller
         }
     }
 
-    public function free(){ 
-        $games = Game::where('type',1)->get(); 
+    public function free(){
+        $games = Game::where('type',1)->get();
+        return $games;
+    }
+    public function money(){
+        $games = Game::where('type',2)->get();
         return $games;
     }
 }
