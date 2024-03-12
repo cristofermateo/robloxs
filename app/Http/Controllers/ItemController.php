@@ -30,14 +30,11 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $items = new Item;
-        $items->user_id= $request->user_id;
+        $items = new Item; 
         $items->name = $request->name;
         $items->price= $request->price;
         $items->photo= $request->photo;
-        $items->sub_cat_id = $request->sub_cat_id;
-
-
+        $items->sub_cat_id = $request->sub_cat_id; 
         $items->save();
         return $items;
     }
@@ -68,27 +65,18 @@ class ItemController extends Controller
         // en lugar de recibir el modelo, mejor recibe el id, para que funcione postman
         //  public function update(Request $request, String $id)
         $items = Item::find($id);
-        $request->validate([
-
-            'name' => 'required',
-            'user_id' => 'required',
+        $request->validate([ 
+            'name' => 'required', 
             'photo' => 'rquired',
             'price' => 'required',
-            'cat_id' => 'cat_id',
-
-        ]);
-
-        $items->name = $request->name;
-        $items->user_id = $request->user_id;
+            'cat_id' => 'cat_id', 
+        ]); 
+        $items->name = $request->name; 
         $items->price = $request->price;
         $items->photo = $request->photo;
-        $items->cat_id = $request->cat_id;
-
-        $items->update();
-
-        return $items;
-
-
+        $items->cat_id = $request->cat_id; 
+        $items->update(); 
+        return $items; 
 
     }
 

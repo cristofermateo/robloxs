@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('photo');
-            $table->integer('price');
-            $table->foreignId('user_id')->constrained();
+            $table->integer('price'); 
             $table->foreignId('sub_cat_id')->constrained();
             $table->timestamps();
         });
