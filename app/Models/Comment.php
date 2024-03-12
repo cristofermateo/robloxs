@@ -12,7 +12,6 @@ class Comment extends Model
     protected $fillable = [
         'user_id',
         'text',
-        'chat_id',
-        'points'
+        'chat_id'
     ];
 }

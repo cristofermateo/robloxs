@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Server;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -105,5 +106,10 @@ class GameController extends Controller
         // El usuario no existe
             return 'ese juego ya se ha eliminado';
         }
+    }
+
+    public function free(){ 
+        $games = Game::where('type',1)->get(); 
+        return $games;
     }
 }

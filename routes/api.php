@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/login', [App\Http\Controllers\AuthenticationController::class, 'login']);
+
 Route::apiResource('/stores',StoreController::class);
 Route::apiResource('/users',UserController::class);
 Route::apiResource('/robuks',RobukController::class);
@@ -47,7 +48,7 @@ Route::apiResource('/cats',CatController::class);
 Route::apiResource('/subcats',SubCatController::class);
 Route::apiResource('/items',ItemController::class);
 
-
+Route::get('/games/free', [App\Http\Controllers\GameController::class, 'free']);
 
 
 

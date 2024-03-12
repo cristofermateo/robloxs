@@ -9,9 +9,9 @@ class Game extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'name'
+    protected $fillable = [ 
+        'name',
+        'type'
     ];
 
     public function chat(){
