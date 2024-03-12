@@ -14,4 +14,8 @@ class Server extends Model
         'region',
         'type'
     ];
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

@@ -60,8 +60,8 @@ Route::get('/games/', [GameController::class, 'index']);
 Route::delete('/games/{id}', [GameController::class, 'destroy']);
 Route::patch('/games/{id}', [GameController::class, 'update']);
 
-Route::post('/Servers', [ServerController::class, 'store']);
-Route::get('/Servers/{id}', [ServerController::class, 'show']);
-Route::get('/Servers/', [ServerController::class, 'index']);
-Route::patch('/Servers/{id}', [ServerController::class, 'update']);
-Route::delete('/Servers/{id}', [ServerController::class, 'destroy']);
+Route::post('/servers', [ServerController::class, 'store']);
+Route::get('/servers/{id}', [ServerController::class, 'show']);
+Route::get('/servers/', [ServerController::class, 'index']);
+Route::patch('/servers/{id}', [ServerController::class, 'update']);
+Route::delete('/servers/{id}', [ServerController::class, 'destroy']);

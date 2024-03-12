@@ -22,6 +22,11 @@ class Game extends Model
     public function rules(){
         return $this->hasMany(Rule::class);
     }
+
+
+    public function servers(){
+        return $this->hasMany(Server::class);
+    }
 }
 
 

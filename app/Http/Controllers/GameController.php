@@ -12,9 +12,9 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::with('rules')->with('chat.comments')->get();
-
-        return $games;
+        $game = Game::with('rules')->with('chat.comments')->get();
+        $game->load('servers');
+        return $game;
     }
 
     /**
@@ -31,7 +31,7 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $game = new Game;
-        $game->user_id= $request->user_id;
+
         $game->name = $request->name;
 
 
@@ -45,8 +45,15 @@ class GameController extends Controller
     public function show(string $id)
     {
        // $game = Game::find($id);
-        $game = Game::where('id',$id)->with('chat.comments')->first();
+        $game = Game::where('id',$id)
+        ->with('chat.comments')
+        ->first();
+
+
+
+
         $game->load('rules');
+        $game->load('servers.users');
         return $game;
     }
 
@@ -69,11 +76,11 @@ class GameController extends Controller
         $request->validate([
 
             'name' => 'required',
-            'user_id' => 'required',
+
         ]);
 
         $game->name = $request->name;
-        $game->user_id = $request->user_id;
+
 
         $game->update();
 

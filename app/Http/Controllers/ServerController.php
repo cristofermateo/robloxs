@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Server;
 use Illuminate\Http\Request;
+use PHPUnit\Event\TestSuite\Loaded;
 
 class ServerController extends Controller
 {
@@ -34,6 +35,8 @@ class ServerController extends Controller
         $servers->type= $request->type;
         $servers->name = $request->name;
         $servers->region = $request->region;
+        $servers->game_id = $request->game_id;
+
 
 
         $servers->save();
@@ -46,6 +49,7 @@ class ServerController extends Controller
     public function show(string $id)
     {
         $servers = Server::find($id);
+        $servers->load('users');
         return $servers;
 
     }
@@ -65,13 +69,16 @@ class ServerController extends Controller
     {
         $servers = Server::find($id);
         $request->validate([
-            'name' => 'name',
-            'type' => 'type',
-            'region' => 'region',
+            'name' => 'required',
+            'type' => 'required',
+            'game_id' => 'required',
+            'region' => 'required',
         ]);
         $servers->region = $request->region;
         $servers->type = $request->type;
         $servers->name = $request->name;
+        $servers->game_id = $request->game_id;
+
         $servers->update();
         return $servers;
     }
@@ -83,10 +90,12 @@ class ServerController extends Controller
     {
         if (Server::where('id', $id)->exists()) {
             // El usuario existesminar el usuario
-            return 'has gastado tus robuks';
+            $server = Server::find($id);
+            $server->delete();
+            return 'servidor eliminado';
         } else {
         // El usuario no existe
-            return 'ya has gastado tus robuks';
+            return '?';
         }
     }
 }

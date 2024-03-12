@@ -36,6 +36,8 @@ class UserController extends Controller
         $user->gender = $request->gender;
         $user->email = $request->email;
         $user->role_id = $request->role_id;
+        $user->server_id = $request->server_id;
+
 
 
         $user->save();
@@ -77,6 +79,8 @@ class UserController extends Controller
             'name' => 'required',
             'password' => 'required',
             'email' => 'required',
+            'role_id' => 'required',
+            'server_id' => 'required',
             'gender' => 'required'
         ]);
 
@@ -84,6 +88,8 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->email = $request->email;
         $user->gender = $request->gender;
+        $user->server_id = $request->server_id;
+
 
         $user->update();
 
